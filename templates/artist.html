@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/artist.css">
+    <title>Artist</title>
+	<style>
+		body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 20px;
+  }
+  
+  .artist {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .card-body p {
+    margin-bottom: 10px;
+  }
+  
+  .upcoming-events {
+    margin-top: 20px;
+  }
+  
+  .upcoming-events h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .upcoming-events p {
+    margin-bottom: 5px;
+  }
+  
+  .upcoming-events ul {
+    margin-top: 5px;
+    margin-bottom: 0;
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .upcoming-events li {
+    margin-bottom: 5px;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  .return-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.return-btn:hover {
+  background-color: #0056b3;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+	</style>
+</head>
+<body>
+    <div class="artist">
+        <img src="{{.Image}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h3 class="card-title">{{.Name}}</h3>
+
+          <p>CreationDate: {{.CreationDate}}</p>
+          <p>Members: 
+            {{- $first := true }}
+            {{- range $index, $element := .Members }}
+              {{- if not $first }}, {{ end }}
+              {{$element}}
+              {{- $first = false }}
+            {{- end }}
+          </p>
+          <p>First album: {{.FirstAlbum}}</p>
+          <p class="upcoming-events">Upcoming events:</p>
+          {{- range $key, $value := .Relation.Relations }}
+          <h4>{{$key}}</h4>
+          <ul>
+            {{- range $index, $location := $value }}
+            <li>{{$location}}</li>
+            {{- end }}
+          </ul>
+          {{- end }}
+        </div>
+        <a href="/" class="return-btn">Return</a>
+    </div>
+   
+</body>
+</html>
