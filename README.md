@@ -1,5 +1,5 @@
 
-# **Groupie-Tracker**   _by AyanaS01 & ebauyrzh_
+# **Groupie-Tracker**  
 
 
 ## Instructions
